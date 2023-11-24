@@ -1,3 +1,6 @@
+## 클래스 다이어그램
+<img width="491" alt="class diagram" src="https://github.com/Gyeongsu1997/To-do-app/assets/97381683/d8745a44-2bb9-4857-b5de-83db37c628c2">
+
 ## 요구사항 분석
 ### 기능 목록
 - 회원 기능
