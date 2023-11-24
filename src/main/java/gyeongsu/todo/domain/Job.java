@@ -16,6 +16,8 @@ public class Job {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String name;
+
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -23,8 +25,20 @@ public class Job {
 
     private LocalDate expiryDate;
 
+    protected Job() {}
+
     public void setMember(Member member) {
         this.member = member;
         member.getJobs().add(this);
+    }
+
+    public static Job createJob(Member member, String name, String description, JobStatus status, LocalDate expiryDate) {
+        Job job = new Job();
+        job.setMember(member);
+        job.name = name;
+        job.description = description;
+        job.status = status;
+        job.expiryDate = expiryDate;
+        return job;
     }
 }

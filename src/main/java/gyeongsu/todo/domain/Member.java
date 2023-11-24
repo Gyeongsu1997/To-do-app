@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
 public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
@@ -18,4 +18,10 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Job> jobs = new ArrayList<>();
+
+    protected Member() {}
+
+    public Member(String name) {
+        this.name = name;
+    }
 }

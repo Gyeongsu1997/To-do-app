@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MemberController {
+    private final MemberService memberService;
+
     @Autowired
-    MemberService memberService;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
 
 //    @GetMapping("/member/join")
 //    public String memberJoin() {
