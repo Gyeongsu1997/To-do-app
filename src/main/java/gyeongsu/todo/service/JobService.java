@@ -38,12 +38,11 @@ public class JobService {
     public void deleteJob() {
 
     }
+    public Job findOne(Long jobId) {
+        return jobRepository.findOne(jobId);
+    }
 
     public List<Job> findJobs() {
         return jobRepository.findAll();
-    }
-
-    public Job findOne(Long jobId) {
-        return jobRepository.findOne(jobId);
     }
 }
