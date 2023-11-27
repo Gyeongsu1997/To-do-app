@@ -23,5 +23,5 @@
   <details>
   <summary>할 일 목록은 마감일을 기준으로 오름차순으로 정렬하여 표시한다.</summary>
     
-    - repository 계층에서 Job을 조회하는 select query에 order by 옵션을 추가함으로써 해결하였다.
+    - repository 계층에서 Job을 조회하는 select query에 order by 옵션을 추가함으로써 해결하였다.
   </details>
