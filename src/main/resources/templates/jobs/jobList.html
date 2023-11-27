@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
 <body>
 <div>
@@ -8,12 +8,17 @@
     <div>
         <h1>TODO list</h1>
         <p>
-            <a class="btn btn-lg btn-secondary" onclick="createMemberForm()">회원 가입</a>
-<!--            <a class="btn btn-lg btn-secondary" href="/members">TODO 추가</a>-->
+            <a class="btn btn-lg btn-secondary" onclick="createMemberForm()">회원 등록</a>
+            <a class="btn btn-lg btn-secondary" href="/jobs/new">TODO 추가</a>
         </p>
-    </div>
-    <div>
-
+        <div class="card" th:each="job : ${jobs}">
+            <h5 class="card-header" th:text="${job.name}">Featured</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
     </div>
 
     <div th:replace="fragments/footer :: footer"></div>
