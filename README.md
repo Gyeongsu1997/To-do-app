@@ -17,6 +17,6 @@
     - HTML의 input field에서 입력 글자수를 제한할 수 있는가?
     - 만약 사용자가 255바이트가 넘어가는 입력을 보내면 어떻게 처리되는가?
   <details>
-      <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
-      - input 태그의 min 속성을 이용해 손쉽게 해결하였다.
+  <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
+    - input 태그의 min 속성을 이용해 손쉽게 해결하였다.
   </details>
