@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MemberController {
@@ -20,10 +21,8 @@ public class MemberController {
     }
 
     @PostMapping("/members/new")
-    public String create(@Valid MemberForm form, BindingResult result) {
-        if (result.hasErrors())
-            throw new RuntimeException();
-        Member member = new Member(form.getName());
+    public String create(@RequestParam("name") String name) {
+        Member member = new Member(name);
         memberService.join(member);
         return "redirect:/";
     }

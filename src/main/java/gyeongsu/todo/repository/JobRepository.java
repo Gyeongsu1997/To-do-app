@@ -1,10 +1,15 @@
 package gyeongsu.todo.repository;
 
 import gyeongsu.todo.domain.Job;
+import gyeongsu.todo.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -24,10 +29,18 @@ public class JobRepository {
         return em.find(Job.class, id);
     }
 
-    public List<Job> findAll() {
-        return em.createQuery("select j from Job j order by j.expiryDate", Job.class)
-                .getResultList();
+    public List<Job> findAll(JobSearch jobSearch) {
+        String jpql = "select j From Job j join j.member m";
+
+        //회원 이름 검색
+        if (StringUtils.hasText(jobSearch.getMemberName())) {
+            jpql += " where m.name like :name";
+        }
+        jpql += " order by j.expiryDate";
+        TypedQuery<Job> query = em.createQuery(jpql, Job.class);
+        if (StringUtils.hasText(jobSearch.getMemberName())) {
+            query = query.setParameter("name", jobSearch.getMemberName());
+        }
+        return query.getResultList();
     }
-
-
 }

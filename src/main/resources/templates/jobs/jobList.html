@@ -2,21 +2,35 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header"></head>
 <body>
-<div>
+<div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
 
     <div>
-        <h1>TODO list</h1>
-        <p>
-            <a class="btn btn-lg btn-secondary" onclick="createMemberForm()">회원 등록</a>
-            <a class="btn btn-lg btn-secondary" href="/jobs/new">TODO 추가</a>
-        </p>
-        <div class="card" th:each="job : ${jobs}">
-            <h5 class="card-header" th:text="${job.name}">Featured</h5>
+        <div class="parent">
+            <p>
+                <a class="btn btn-lg btn-secondary" onclick="createMemberForm()">회원 등록</a>
+                <a class="btn btn-lg btn-secondary" href="/jobs/new">TODO 추가</a>
+            </p>
+        </div>
+        <div>
+            <form th:object="${jobSearch}" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberName}" class="form-control" placeholder="회원명"/>
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">검색</button>
+            </form>
+        </div>
+        <div class="card" th:each="job : ${jobs}" th:class="${job.expiryDate <= today} ? 'card expired' : 'card'">
+            <div class="card-header">
+                <h5 style="float: left" th:text="${job.name}"></h5>
+                <h5 style="float: right" th:text="${job.status}" th:class="${job.status.name()}"></h5>
+            </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title" th:text="${job.member.name}"></h5>
+                <p class="card-text" th:text="${job.description}"></p>
+                <p class="card-text" th:text="'마감: ' + ${job.expiryDate}"></p>
+                <a href="#" th:href="@{/jobs/{id}/edit (id=${job.id})}" class="btn btn-primary" role="button">수정</a>
+                <a href="#" th:href="@{/jobs/{id}/delete (id=${job.id})}" class="btn btn-primary" role="button">삭제</a>
             </div>
         </div>
     </div>

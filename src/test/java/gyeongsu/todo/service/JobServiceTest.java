@@ -3,6 +3,7 @@ package gyeongsu.todo.service;
 import gyeongsu.todo.domain.Job;
 import gyeongsu.todo.domain.JobStatus;
 import gyeongsu.todo.domain.Member;
+import gyeongsu.todo.repository.JobSearch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Assertions;
@@ -65,8 +66,11 @@ public class JobServiceTest {
         jobService.saveJob(member.getId(), name, description, status, expiryDate[3]);
         jobService.saveJob(member.getId(), name, description, status, expiryDate[2]);
 
+        JobSearch jobSearch = new JobSearch();
+        jobSearch.setMemberName(null);
+
         //When
-        List<Job> jobList = jobService.findJobs();
+        List<Job> jobList = jobService.findJobs(jobSearch);
 
         //Then
         assertEquals(4, jobList.size());
@@ -76,6 +80,37 @@ public class JobServiceTest {
         for (Job job : jobList) {
             assertEquals(expiryDate[i], job.getExpiryDate());
             i++;
+        }
+    }
+
+    @Test
+    void 특정회원_할일조회() {
+        //Given
+        Member member1 = new Member("James");
+        Member member2 = new Member("Thomas");
+        em.persist(member1);
+        em.persist(member2);
+        String name = "장 보기";
+        String description = "두부 한 모, 포카칩 3봉지, 배추 한 포기";
+        JobStatus status = JobStatus.NOT_STARTED;
+        LocalDate expiryDate = LocalDate.now();
+
+        jobService.saveJob(member1.getId(), name, description, status, expiryDate);
+        jobService.saveJob(member2.getId(), name, description, status, expiryDate);
+        jobService.saveJob(member1.getId(), name, description, status, expiryDate);
+        jobService.saveJob(member2.getId(), name, description, status, expiryDate);
+
+        JobSearch jobSearch = new JobSearch();
+        jobSearch.setMemberName(member1.getName());
+
+        //When
+        List<Job> jobList = jobService.findJobs(jobSearch);
+
+        //Then
+        assertEquals(2, jobList.size());
+
+        for (Job job : jobList) {
+            assertEquals(member1, job.getMember());
         }
     }
 }

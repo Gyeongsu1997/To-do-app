@@ -20,7 +20,7 @@ public class JobForm {
     private String name;
 
     private String description;
-    
+
     @Enumerated(EnumType.STRING)
     private JobStatus status;
 

@@ -3,6 +3,7 @@ package gyeongsu.todo.controller;
 import gyeongsu.todo.domain.Job;
 import gyeongsu.todo.domain.JobStatus;
 import gyeongsu.todo.domain.Member;
+import gyeongsu.todo.repository.JobSearch;
 import gyeongsu.todo.service.JobService;
 import gyeongsu.todo.service.MemberService;
 import jakarta.validation.Valid;
@@ -29,10 +30,11 @@ public class JobController {
     }
 
     @RequestMapping("/")
-    public String list(Model model) {
-        List<Job> jobs = jobService.findJobs();
+    public String list(@ModelAttribute("jobSearch") JobSearch jobSearch, Model model) {
+        List<Job> jobs = jobService.findJobs(jobSearch);
 
         model.addAttribute("jobs", jobs);
+        model.addAttribute("today", LocalDate.now());
         return "jobs/jobList";
     }
     @GetMapping("/jobs/new")
@@ -43,16 +45,23 @@ public class JobController {
         model.addAttribute("members", members);
         model.addAttribute("statuses", statuses);
         model.addAttribute("today", LocalDate.now());
-        model.addAttribute("form", new JobForm());
+        model.addAttribute("jobForm", new JobForm());
 
         return "jobs/createJobForm";
     }
 
     @PostMapping("/jobs/new")
-    public String create(@Valid JobForm form, BindingResult result) {
-        if (result.hasErrors())
-            throw new RuntimeException();
-        jobService.saveJob(form.getMemberId(), form.getName(), form.getDescription(), form.getStatus(), form.getExpiryDate());
+    public String create(@Valid JobForm jobForm, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<Member> members = memberService.findMembers();
+            List<JobStatus> statuses = new ArrayList<>(EnumSet.allOf(JobStatus.class));
+
+            model.addAttribute("members", members);
+            model.addAttribute("statuses", statuses);
+            model.addAttribute("today", LocalDate.now());
+            return "jobs/createJobForm";
+        }
+        jobService.saveJob(jobForm.getMemberId(), jobForm.getName(), jobForm.getDescription(), jobForm.getStatus(), jobForm.getExpiryDate());
         return "redirect:/";
     }
 

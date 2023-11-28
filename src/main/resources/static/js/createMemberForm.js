@@ -11,6 +11,7 @@ function createMemberForm() {
     newInput.setAttribute("type", "text");
     newInput.setAttribute("name", "name");
     newInput.setAttribute("placeholder", "이름을 입력하세요");
+    newInput.setAttribute("style", "margin-right: 10px");
     newInput.required = true;
 
     // create element (button)
@@ -18,6 +19,7 @@ function createMemberForm() {
     // set attribute (button)
     newButton.setAttribute("type", "submit");
     newButton.setAttribute("class", "btn btn-primary");
+    newButton.setAttribute("style", "margin-bottom: 10px");
     newButton.innerHTML = "등록";
 
     // append input, button (to form)
@@ -25,5 +27,5 @@ function createMemberForm() {
     newForm.appendChild(newButton);
 
     // append form (to body)
-    document.body.appendChild(newForm);
+    document.querySelector('.parent').insertBefore(newForm, null);
 }
