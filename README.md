@@ -14,7 +14,6 @@
   - Job 엔티티의 description 필드를 데이터베이스 테이블에 VARCHAR(255) 타입으로 설정하고, 사용자가 255바이트 이하의 글자를 입력하도록 제한한다.
     - HTML의 input field에서 입력 글자수를 제한할 수 있는가?
     - 만약 사용자가 255바이트가 넘어가는 입력을 보내면 어떻게 처리되는가?
-  - 특정 회원의 할 일만을 조회할 수 있다.
   <details>
   <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
     
@@ -29,4 +28,9 @@
   <summary>마감일이 지났거나 마감일 당일에 해당하는 할 일은 빨간색으로 표시한다.</summary>
     
     - LocalDate.now()를 today라는 이름으로 model에 담아 th:class="${job.expiryDate <= today} ? 'card expired' : 'card'"의 형태로 job 엔티티의       expiryDate 속성이 today보다 작거나 같으면 추가적인 클래스가 적용되도록 하였다.
+  </details>
+  <details>
+  <summary>특정 회원의 할 일만을 조회할 수 있다.</summary>
+    
+    - String 타입의 memberName 필드를 갖는 JobSearch라는 클래스를 만들어 memberName에 값이 있으면 select query에 where절을 추가함으로써 해결하였다.
   </details>
