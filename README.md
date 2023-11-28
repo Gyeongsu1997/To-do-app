@@ -4,7 +4,11 @@
 ## 요구사항 분석
 ### 기능 목록
 - 회원 기능
-  - 회원 등록
+  <details>
+  <summary>회원 등록</summary>
+    
+    - 회원 등록 버튼을 누르면 createMemberForm()이라는 자바스크립트 함수가 실행되어 동적으로 form과 input, button을 만든다. input 태그에는 required 속성이 true로 설정되어 있어 값을 입력하지 않고 버튼을 누르면 '이 입력란을 작성하세요'라는 알림이 나타난다.
+  </details>
 - 할 일 기능
   - 할 일 등록
   - 할 일 조회
