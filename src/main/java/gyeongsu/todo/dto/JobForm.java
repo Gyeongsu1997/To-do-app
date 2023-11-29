@@ -10,6 +10,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * use between controller and view
+ */
 @Getter @Setter
 public class JobForm {
     private Long memberId;

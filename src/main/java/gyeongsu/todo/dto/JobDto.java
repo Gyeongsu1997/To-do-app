@@ -9,6 +9,9 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+/**
+ * use between controller and service layer
+ */
 @Getter @Setter
 public class JobDto {
     private Long id;

@@ -42,10 +42,6 @@ public class JobService {
         job.change(jobDto.getName(), jobDto.getDescription(), jobDto.getStatus(), jobDto.getExpiryDate());
     }
 
-    @Transactional
-    public void deleteJob() {
-
-    }
     public Job findOne(Long jobId) {
         return jobRepository.findOne(jobId);
     }

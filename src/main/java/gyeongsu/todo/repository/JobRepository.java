@@ -16,11 +16,7 @@ public class JobRepository {
     private EntityManager em;
 
     public void save(Job job) {
-        if (job.getId() == null) {
-            em.persist(job);
-        } else {
-            em.merge(job);
-        }
+        em.persist(job);
     }
 
     public Job findOne(Long id) {

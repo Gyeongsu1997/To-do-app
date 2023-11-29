@@ -30,7 +30,7 @@
                 <p class="card-text" th:text="${job.description}"></p>
                 <p class="card-text" th:text="'마감: ' + ${job.expiryDate}"></p>
                 <a href="#" th:href="@{/jobs/{id}/edit (id=${job.id})}" class="btn btn-primary" role="button">수정</a>
-                <a href="#" th:href="@{/jobs/{id}/delete (id=${job.id})}" class="btn btn-primary" role="button">삭제</a>
+<!--                <a href="#" th:href="@{/jobs/{id}/delete (id=${job.id})}" class="btn btn-primary" role="button">삭제</a>-->
             </div>
         </div>
     </div>
