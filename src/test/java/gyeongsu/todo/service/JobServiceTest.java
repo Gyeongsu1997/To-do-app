@@ -3,10 +3,10 @@ package gyeongsu.todo.service;
 import gyeongsu.todo.domain.Job;
 import gyeongsu.todo.domain.JobStatus;
 import gyeongsu.todo.domain.Member;
-import gyeongsu.todo.repository.JobSearch;
+import gyeongsu.todo.dto.JobDto;
+import gyeongsu.todo.dto.JobSearch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,8 +34,10 @@ public class JobServiceTest {
         JobStatus status = JobStatus.NOT_STARTED;
         LocalDate expiryDate = LocalDate.of(3000, 01, 01);
 
+        JobDto jobDto = new JobDto(member.getId(), name, description, status, expiryDate);
+
         //When
-        Long jobId = jobService.saveJob(member.getId(), name, description, status, expiryDate);
+        Long jobId = jobService.saveJob(jobDto);
 
         //Then
         Job job = jobService.findOne(jobId);
@@ -45,6 +47,36 @@ public class JobServiceTest {
         assertEquals(description, job.getDescription());
         assertEquals(status, job.getStatus());
         assertEquals(expiryDate, job.getExpiryDate());
+    }
+
+    @Test
+    void 할일수정() {
+        //Given
+        Member member = new Member("gyeongsu");
+        em.persist(member);
+        String name = "장 보기";
+        String description = "두부 한 모, 포카칩 3봉지, 배추 한 포기";
+        JobStatus status = JobStatus.NOT_STARTED;
+        LocalDate expiryDate = LocalDate.of(3000, 01, 01);
+
+        JobDto jobDto = new JobDto(member.getId(), name, description, status, expiryDate);
+
+        Long jobId = jobService.saveJob(jobDto);
+
+        //When
+        jobDto.setId(jobId);
+        jobDto.setName("약 먹기");
+        jobDto.setDescription("식후 30분 3정 복용");
+        jobDto.setStatus(JobStatus.DONE);
+        jobDto.setExpiryDate(LocalDate.of(3000, 01, 02));
+        jobService.updateJob(jobDto);
+
+        //Then
+        Job job = jobService.findOne(jobId);
+        assertEquals("약 먹기", job.getName());
+        assertEquals("식후 30분 3정 복용", job.getDescription());
+        assertEquals(JobStatus.DONE, job.getStatus());
+        assertEquals(LocalDate.of(3000, 01, 02), job.getExpiryDate());
     }
 
     @Test
@@ -61,10 +93,15 @@ public class JobServiceTest {
         expiryDate[2] = LocalDate.of(3000, 01, 03);
         expiryDate[3] = LocalDate.of(3000, 01, 04);
 
-        jobService.saveJob(member.getId(), name, description, status, expiryDate[1]);
-        jobService.saveJob(member.getId(), name, description, status, expiryDate[0]);
-        jobService.saveJob(member.getId(), name, description, status, expiryDate[3]);
-        jobService.saveJob(member.getId(), name, description, status, expiryDate[2]);
+        JobDto[] jobDto = new JobDto[4];
+        for (int i = 0; i < 4; i++) {
+            jobDto[i] = new JobDto(member.getId(), name, description, status, expiryDate[i]);
+        }
+
+        jobService.saveJob(jobDto[1]);
+        jobService.saveJob(jobDto[0]);
+        jobService.saveJob(jobDto[3]);
+        jobService.saveJob(jobDto[2]);
 
         JobSearch jobSearch = new JobSearch();
         jobSearch.setMemberName(null);
@@ -95,10 +132,13 @@ public class JobServiceTest {
         JobStatus status = JobStatus.NOT_STARTED;
         LocalDate expiryDate = LocalDate.now();
 
-        jobService.saveJob(member1.getId(), name, description, status, expiryDate);
-        jobService.saveJob(member2.getId(), name, description, status, expiryDate);
-        jobService.saveJob(member1.getId(), name, description, status, expiryDate);
-        jobService.saveJob(member2.getId(), name, description, status, expiryDate);
+        JobDto jobDto1 = new JobDto(member1.getId(), name, description, status, expiryDate);
+        JobDto jobDto2 = new JobDto(member2.getId(), name, description, status, expiryDate);
+
+        jobService.saveJob(jobDto1);
+        jobService.saveJob(jobDto2);
+        jobService.saveJob(jobDto1);
+        jobService.saveJob(jobDto2);
 
         JobSearch jobSearch = new JobSearch();
         jobSearch.setMemberName(member1.getName());

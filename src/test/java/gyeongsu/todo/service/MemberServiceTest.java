@@ -19,24 +19,24 @@ public class MemberServiceTest {
     @Test
     void 회원가입() throws Exception {
         //Given
-        Member member = new Member("gyeongsu");
 
         //When
-        Long saveId = memberService.join(member);
+        Long saveId = memberService.join("gyeongsu");
 
         //Then
-        assertEquals(member, memberService.findOne(saveId));
+        assertEquals("gyeongsu", memberService.findOne(saveId).getName());
     }
 
     @Test
     void 회원목록조회() throws Exception {
         //Given
-        Member member1 = new Member("gyeongsu1");
-        Member member2 = new Member("gyeongsu2");
-        Member member3 = new Member("gyeongsu3");
-        memberService.join(member1);
-        memberService.join(member2);
-        memberService.join(member3);
+        Long saveId1 = memberService.join("gyeongsu1");
+        Long saveId2 = memberService.join("gyeongsu2");
+        Long saveId3 = memberService.join("gyeongsu3");
+
+        Member member1 = memberService.findOne(saveId1);
+        Member member2 = memberService.findOne(saveId2);
+        Member member3 = memberService.findOne(saveId3);
 
         //When
         List<Member> memberList = memberService.findMembers();

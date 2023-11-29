@@ -1,4 +1,4 @@
-package gyeongsu.todo.repository;
+package gyeongsu.todo.dto;
 
 import lombok.Getter;
 import lombok.Setter;

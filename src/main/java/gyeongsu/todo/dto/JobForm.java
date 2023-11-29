@@ -1,4 +1,4 @@
-package gyeongsu.todo.controller;
+package gyeongsu.todo.dto;
 
 import gyeongsu.todo.domain.JobStatus;
 import gyeongsu.todo.domain.Member;
@@ -12,8 +12,6 @@ import java.time.LocalDate;
 
 @Getter @Setter
 public class JobForm {
-    private Long id;
-
     private Long memberId;
 
     @NotEmpty(message = "이름을 입력해 주십시오.")

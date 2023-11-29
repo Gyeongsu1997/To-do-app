@@ -1,15 +1,13 @@
 package gyeongsu.todo.repository;
 
 import gyeongsu.todo.domain.Job;
-import gyeongsu.todo.domain.Member;
+import gyeongsu.todo.dto.JobSearch;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository

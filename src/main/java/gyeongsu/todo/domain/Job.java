@@ -41,4 +41,11 @@ public class Job {
         job.expiryDate = expiryDate;
         return job;
     }
+
+    public void change(String name, String description, JobStatus status, LocalDate expiryDate) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.expiryDate = expiryDate;
+    }
 }
