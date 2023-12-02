@@ -53,4 +53,5 @@
   </details>
 
 ## 동작 화면
+
 ![todo scenario](https://github.com/Gyeongsu1997/ToDo/assets/97381683/e0d7d148-f898-49f5-b28a-d41ed14f9e82)
