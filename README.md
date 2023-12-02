@@ -1,5 +1,6 @@
 ## 사용 기술
 - Spring Boot 3.1.5
+- Thymeleaf
 - JPA
 
 ## 클래스 다이어그램
