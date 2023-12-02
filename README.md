@@ -27,6 +27,8 @@
       <summary>HTML의 input field에서 입력 글자수를 제한할 수 있는가?</summary>
       
       - input 태그 대신 textarea 태그를 사용하였다. 문자가 입력될때마다 checkByte라는 자바스크립트 함수가 실행되어 현재까지 입력된 바이트를 계산하고 입력된 바이트가 255바이트를 초과하면 substr 메서드로 문자열의 끝부분을 잘라내었다.
+      - 참고 1: [textarea 글자수 제한 / 바이트(Byte) 제한](https://hellcoding.tistory.com/entry/textarea-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C-%EB%B0%94%EC%9D%B4%ED%8A%B8Byte-%EC%A0%9C%ED%95%9C)
+      - 참고 2: [textarea 입력한 한/영 byte 자르기](https://hansoul.tistory.com/115#google_vignette)
       </details>
   </details>
   <details>
