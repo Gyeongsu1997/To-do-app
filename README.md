@@ -12,7 +12,7 @@
   <details>
   <summary>회원 등록</summary>
     
-    - 회원 등록 버튼을 누르면 createMemberForm()이라는 자바스크립트 함수가 실행되어 동적으로 form과 input, button을 만든다. input 태그에는 required 속성이 true로 설정되어 있어 값을 입력하지 않고 버튼을 누르면 '이 입력란을 작성하세요'라는 알림이 나타난다.
+    - 회원 등록 버튼을 누르면 createMemberForm이라는 자바스크립트 함수가 실행되어 동적으로 form과 input, button을 만든다. input 태그에는 required 속성이 true로 설정되어 있어 값을 입력하지 않고 버튼을 누르면 '이 입력란을 작성하세요'라는 알림이 나타난다.
   </details>
 - 할 일 기능
   - 할 일 등록
@@ -22,13 +22,12 @@
   <details>
   <summary>Job 엔티티의 description 필드를 데이터베이스 테이블에 VARCHAR(255) 타입으로 설정하고, 사용자가 255바이트 이하의 글자를 입력하도록 제한한다.</summary>
 
-    - <details>
-      <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
-      
-      - LocalDate.now()를 today라는 이름으로 model에 담아 input 태그의 min 속성에 적용함으로써 손쉽게 해결하였다.
-      </details>
-    - HTML의 input field에서 입력 글자수를 제한할 수 있는가?
     - 만약 사용자가 255바이트가 넘어가는 입력을 보내면 어떻게 처리되는가? -> JdbcSQLDataException이 발생하였다.
+    - <details>
+      <summary>HTML의 input field에서 입력 글자수를 제한할 수 있는가?</summary>
+      
+      - input 태그 대신 textarea 태그를 사용하였다. 문자가 입력될때마다 checkByte라는 자바스크립트 함수가 실행되어 현재까지 입력된 바이트를 계산하고 입력된 바이트가 255바이트를 초과하면 substr 메서드로 문자열의 끝부분을 잘라내었다.
+      </details>
   </details>
   <details>
   <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
