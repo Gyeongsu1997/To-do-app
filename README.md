@@ -21,7 +21,12 @@
 - 기타 요구사항
   <details>
   <summary>Job 엔티티의 description 필드를 데이터베이스 테이블에 VARCHAR(255) 타입으로 설정하고, 사용자가 255바이트 이하의 글자를 입력하도록 제한한다.</summary>
+
+    <details>
+    <summary>할 일의 마감일은 오늘 날짜 이후로 설정 가능하다.</summary>
     
+    - LocalDate.now()를 today라는 이름으로 model에 담아 input 태그의 min 속성에 적용함으로써 손쉽게 해결하였다.
+    </details>
     - HTML의 input field에서 입력 글자수를 제한할 수 있는가?
     - 만약 사용자가 255바이트가 넘어가는 입력을 보내면 어떻게 처리되는가? -> JdbcSQLDataException이 발생하였다.
   </details>
