@@ -53,7 +53,3 @@
     
     - String 타입의 memberName 필드를 갖는 JobSearch라는 클래스를 만들어 memberName에 값이 있으면 select query에 where절을 추가함으로써 해결하였다.
   </details>
-
-## 동작 화면
-
-![todo scenario](https://github.com/Gyeongsu1997/ToDo/assets/97381683/e0d7d148-f898-49f5-b28a-d41ed14f9e82)
