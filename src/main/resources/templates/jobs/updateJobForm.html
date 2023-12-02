@@ -16,8 +16,8 @@
                    th:class="${#fields.hasErrors('name')} ? 'form-control fieldError' : 'form-control'">
         </div>
         <div class="form-group">
-            <label th:for="description">내용</label>
-            <input type="text" th:field="*{description}" class="form-control" placeholder="내용을 입력하세요">
+            <label th:for="description">내용 (<span id="nowByte">0</span>/255bytes)</label>
+            <textarea rows="10" th:field="*{description}" class="form-control" onkeyup="checkByte(this)" placeholder="내용을 입력하세요"></textarea>
         </div>
         <div class="form-group">
             <label for="status">진행 상태</label>
