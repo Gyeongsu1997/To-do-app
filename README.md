@@ -51,3 +51,5 @@
     
     - String 타입의 memberName 필드를 갖는 JobSearch라는 클래스를 만들어 memberName에 값이 있으면 select query에 where절을 추가함으로써 해결하였다.
   </details>
+
+## 동작 화면
